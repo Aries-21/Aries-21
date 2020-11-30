@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <title>My Resume</title>
+  <meta charset="utf-8">
+  <style>
+    .wrap,
+    .circle,
+    .num {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+    }
+
+    .wrap {
+      position: relative;
+      border: 10px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .circle {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      box-sizing: border-box;
+    }
+
+    .circle div {
+      width: 140px;
+      height: 140px;
+      position: absolute;
+      box-sizing: border-box;
+      border-radius: 50%;
+    }
+
+    .num {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      line-height: 140px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    .pal {
+      clip: rect(0, 70px, 140px, 0);
+      border: 10px solid #FF9F55;
+    }
+
+    .par {
+      clip: rect(0, 140px, 140px, 70px);
+      border: 10px solid #FF9F55;
+    }
+
+
+
+
+
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* The actual timeline (the vertical ruler) */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 5px;
+      background-color: white;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+    }
+
+    /* Container around content */
+    .container {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+    }
+
+    /* The circles on the timeline */
+    .container::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -17px;
+      background-color: white;
+      border: 4px solid #FF9F55;
+      top: 16px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    /* Place the container to the left */
+    .left {
+      left: -10%;
+    }
+
+    /* Place the container to the right */
+    .right {
+      left: 50%;
+    }
+
+    /* Add arrows to the left container (pointing right) */
+    .left::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      right: 30px;
+      border: medium solid white;
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent white;
+    }
+
+    /* Add arrows to the right container (pointing left) */
+    .right::before {
+      content: " ";
+      height: 0;
+      position: absolute;
+      top: 22px;
+      width: 0;
+      z-index: 1;
+      left: 30px;
+      border: medium solid white;
+      border-width: 10px 10px 10px 0;
+      border-color: transparent white transparent transparent;
+    }
+
+    /* Fix the circle for containers on the right side */
+    .right::after {
+      left: -16px;
+    }
+
+    /* The actual content */
+    .content {
+      padding: 20px 30px;
+      background-color: white;
+      position: relative;
+      border-radius: 6px;
+    }
+
+    /* Media queries - Responsive timeline on screens less than 600px wide */
+    @media screen and (max-width: 600px) {
+
+      /* Place the timelime to the left */
+      .timeline::after {
+        left: 30px;
+      }
+
+      /* Full-width containers */
+      .container {
+        width: 50%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      /* Make sure that all arrows are pointing leftwards */
+      .container::before {
+        left: 60px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+      }
+
+      /* Make sure all circles are at the same spot */
+      .left::after,
+      .right::after {
+        left: 15px;
+      }
+
+      /* Make all right containers behave like the left ones */
+      .right {
+        left: 0%;
+      }
+    }
+
+    .content {
+      padding-left: 20px;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 25px;
+      transition: 0.4s;
+    }
+
+    .active,
+    .content:hover {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      opacity: 70%;
+    }
+
+    .content:after {
+      content: '\002B';
+      color: #777;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .active:after {
+      content: "\2212";
+    }
+
+    .panel {
+      padding: 0 18px;
+      background-color: white;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    body {
+      background-color: #34344A;
+    }
+
+    .total {
+      background-color: #42F2F7;
+      margin: auto;
+      width: 80%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .img1:hover {
+      -webkit-transform: rotate(30deg);
+      opacity: 60%;
+    }
+
+    .div1 {
+      opacity: 50%;
+    }
+
+    .div1:hover {
+      opacity: 100%;
+    }
+
+    .word1:hover {
+      opacity: 60%;
+    }
+
+    .word2:hover {
+      opacity: 75%;
+    }
+  </style>
+</head>
+
+<body>
+  <div align="center" style="padding-top: 20px;">
+    <img src="pic/title.png">
+  </div>
+  <div class="total">
+    <div class="div1">
+      <div align="center" style="padding-top: 40px;">
+        <div style="width: 300px; height: 300px; border-radius: 50%; background-color:white;">
+          <img src="pic/mu.png" style="height: 300px; width: 300px;"></div>
+      </div>
+      <div align=" center">
+        <img src="pic/name.png" width="250px">
+        <a href="mailto:18157282021@163.com"><img class="img1" src="pic/gmail.png" height="40px" width="45px"></a>
+        <a href="https://www.facebook.com/profile.php?id=100013270245845" target="_blank"><img class="img1"
+            src=" pic/FB.jpg" style="padding-left: 8px;" height="40px"></a>
+      </div>
+      <hr color="#E2FDFF" style="width: 40%;">
+      <div align="center" class="word1" style="font-size: 30px; padding-bottom: 5px;">
+        <h>中原大學 資管四乙</h>
+      </div>
+      <div align="center" class="word1" style="font-size: 30px; padding-bottom: 5px;">
+        <h>Birthday:1998/4/12</h>
+      </div>
+      <div align="center" class="word1" style="font-size: 30px; padding-bottom: 5px;">
+        <h>興趣的話大概是聽音樂和看電影這類放鬆的活動</h>
+      </div>
+      <hr color="#E2FDFF" style="width: 60%;">
+      <div align="center" class="word1">
+        <img src="pic/talk.png">
+      </div>
+      <hr color="#E2FDFF" style="width: 80%;">
+    </div>
+    <div class="div1">
+      <div align="center">
+        <img src="pic/skill.png" width="300px">
+      </div>
+      <div align="center" style="padding-top: 30px;">
+        <table>
+          <tr>
+            <td>
+              <div id="c#"></div>
+              <p class="word2" style="text-align: center; font-size: 30px;">C#</p>
+            </td>
+            <td style="padding-left: 35px;">
+              <div id="java"></div>
+              <p class="word2" style="text-align: center; font-size: 30px;">java</p>
+            </td>
+            <td style="padding-left: 35px">
+              <div id="html"></div>
+              <p class="word2" style="text-align: center; font-size: 30px;">html</p>
+            </td>
+            <td style="padding-left: 35px">
+              <div id="css"></div>
+              <p class="word2" style="text-align: center; font-size: 30px;">css</p>
+            </td>
+            <td style="padding-left: 35px;">
+              <div id="java script"></div>
+              <p class="word2" style="text-align: center; font-size: 30px;">java script</p>
+            </td>
+            <td style="padding-left: 35px;">
+              <div id="python"></div>
+              <p class="word2" style="text-align: center; font-size: 30px;">python</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <hr color="#E2FDFF" style="width: 80%;">
+    </div>
+    <div class="div1" style="padding-bottom: 40px;">
+      <div align="center">
+        <img src="pic/experience.png" width="300px">
+      </div>
+      <div class="timeline">
+        <div class="container left">
+          <button class="content">2020</button>
+          <div class="panel">
+            <div class="word1">
+              <p>因為疫情影響導致上半年只能在家遠距教學</p>
+            </div>
+            <div class="word1">
+              <p>老師們給了很多幫助和體諒，順利完成了所有課程</p>
+            </div>
+            <div class="word1">
+              <p>下半年的多媒體期中專案花費了很多時間沒有做好，但觀看同學成果的時候吸取了很多經驗和想法</p>
+            </div>
+            <div class="word1">
+              <p>企業概論的專案與甘樂文創合作，推廣禾乃川工坊的手工餅乾</p>
+            </div>
+          </div>
+        </div>
+        <div class="container right">
+          <button class="content">2019</button>
+          <div class="panel">
+            <div class="word1">
+              <p>這一年開始畢業專案，我們小組選擇了VR模擬面試的主題</p>
+            </div>
+            <div class="word1">
+              <p>同時間和組員順利完成了劉老師的SA專案</p>
+            </div>
+            <div class="word1">
+              <p>管理學的課程讓我有更多的機會作為義工參與社會活動</p>
+            </div>
+          </div>
+        </div>
+        <div class="container left">
+          <button class="content">2018</button>
+          <div class="panel">
+            <div class="word1">
+              <p>轉系到了資訊管理學係</p>
+            </div>
+            <div class="word1">
+              <p>第一學期學習狀態很差，遭受了一些問題</p>
+            </div>
+            <div class="word1">
+              <p>第二學期因為打球受傷住院又耽誤了很多</p>
+            </div>
+            <div class="word1">
+              <p>我的導師老皮給了我很多幫助，家裡也一直支持我的決定</p>
+            </div>
+          </div>
+        </div>
+        <div class="container right">
+          <button class="content">2017</button>
+          <div class="panel">
+            <div class="word1">
+              <p>上學期很多課程都不順利，特別是資料結構這類的程式課</p>
+            </div>
+            <div class="word1">
+              <p>下學期到別的大學進行了交流，感受了其他地方的環境也調整了自己的目標</p>
+            </div>
+          </div>
+        </div>
+        <div class="container left">
+          <button class="content">2016</button>
+          <div class="panel">
+            <div class="word1">
+              <p>進入中原大學資訊工程學係開始大學生活</p>
+            </div>
+            <div class="word1">
+              <p>夏老師的計算機概論給了我很深的印象</p>
+            </div>
+            <div class="word1">
+              <p>除了學習還參加了那一屆的大隊接力，可惜成績一般</p>
+            </div>
+            <div class="word1">
+              <p>加入係籃球隊認識了很多學長給了我不少幫助</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer align="center">
+    <p style="color:#42F2F7;">Cppyright@2020,MU-QY</p>
+  </footer>
+
+  <script type="text/javascript">
+    function Yuan(id, num) {
+      this.box = document.getElementById(id); //获取节点
+      this.box.className = 'wrap';
+
+      //创建节点circle
+      this.circle = document.createElement("div");
+      this.circle.className = "circle";
+      this.box.appendChild(this.circle);
+
+      //创建circle的子节点left
+      this.left = document.createElement("div");
+      this.left.className = "pal";
+      this.circle.appendChild(this.left);
+
+      //创建circle的子节点right
+      this.right = document.createElement("div");
+      this.right.className = "par";
+      this.circle.appendChild(this.right);
+
+      //创建节点num
+      this.num = document.createElement("div");
+      this.num.className = "num";
+      this.box.appendChild(this.num);
+      this.num.innerHTML = '<span id="">' + num + '</span>%';
+
+      this.jz(num);
+    }
+
+    Yuan.prototype.jz = function (num) {
+      var i = 0;
+      var that = this;
+      var int = setInterval(function () {
+        that.gx(num / 10 * i);
+        i++;
+        if (i > 10) {
+          clearInterval(int)
+        }
+      }, 50);
+    }
+
+    Yuan.prototype.gx = function (n) {
+
+      if (n <= 50) {
+        this.right.style.display = 'none';
+        this.circle.style.clip = 'rect(0, 140px, 140px, 70px)';
+      } else {
+        this.right.style.display = 'block';
+        this.circle.style.clip = 'rect(auto, auto, auto, auto)';
+      }
+      this.left.style.transform = 'rotate(' + n * 360 / 100 + 'deg)';
+
+    }
+
+    var box = new Yuan('c#', 65);
+    var box1 = new Yuan('java', 75);
+    var box2 = new Yuan('html', 65);
+    var box3 = new Yuan('css', 60);
+    var box4 = new Yuan('java script', 30);
+    var box5 = new Yuan('python', 45);
+  </script>
+
+  <script>
+    var acc = document.getElementsByClassName("content");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
